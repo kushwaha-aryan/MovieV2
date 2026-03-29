@@ -1,0 +1,342 @@
+body{
+    background-color: black;
+}
+
+.topNav{
+    overflow: hidden;
+    background-color: cornflowerblue;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.topNav:hover{
+    background-color: black;
+}
+
+.topNav a{
+    font-style: italic;
+    text-decoration: none;
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+}
+
+.topNav a:hover{
+    border: 3px solid white;
+    border-radius: 15px;
+    color: mediumpurple;
+    box-shadow: 0 0 100px greenyellow;
+    font-size: 32px;
+    background-color: lightpink;
+}
+
+.topNav .searchBar{
+    float: right;
+}
+
+form{
+    background-color:lightcyan;
+    width: 300px;
+    height: 43px;
+    border-radius:11px;
+    display: flex;
+    text-align: center;
+}
+
+input:hover {
+    background-color: cyan;
+}
+
+input{
+    color: deepskyblue;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    font: 15px system-ui;
+    border-radius: 11px;
+}
+
+.genre-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.genre-btn{
+    border: 3px solid lightskyblue;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: lightpink;
+}
+
+.genre-btn:hover{
+    font-size: 22px;
+    box-shadow: 0 0 100px greenyellow;
+}
+
+.genre {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns exactly */
+    gap: 10px; /* spacing between labels */
+    min-width: 300px; /* adjust so 3 fit nicely */
+    padding: 10px;
+    background-color: #222;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #000;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    display: none; /* hidden until hover */
+}
+
+.genre label {
+    border: 2px solid deepskyblue;
+    display: block;
+    color: white;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.genre label:hover {
+    background-color: aqua;
+    color: black;
+    font-size: 20px;
+    box-shadow: 0 0 10px aquamarine;
+}
+
+.genre-wrapper:hover .genre {
+    display: grid;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.card{
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #151f30;
+    color: white;
+}
+.card:hover{
+    background-color: lightskyblue;
+    border-radius: 22px;
+    box-shadow: 0 0 30px greenyellow;
+}
+
+.card:hover .thumbnail{
+    box-shadow: none;
+    border-radius: 22px;
+    margin-top: 10px;
+}
+
+.thumbnail{
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: hotpink 2px 4px 4px;
+    padding: 10px;
+    height:300px;
+    width:250px;
+    display: block;
+    margin:auto;
+}
+
+.thumbnail:hover{
+    transform: scale(1.1);
+    border: none;
+    transition: 0.5s;
+}
+
+#loadMore {
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#loadMore:hover {
+    background-color: mediumpurple;
+    box-shadow: 0 0 15px greenyellow;
+}
+
+#section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 20px;
+}
+
+.overview{
+    border: 3px solid lavenderblush;
+    border-radius: 10px;
+    padding: 10px;
+    font-style: italic;
+    color: darkorchid;
+
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transform:translateY(10px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .overview{
+    max-height:200px; /* enough for text */
+    opacity:1;
+    transform:translateY(0);
+    background-color: rgba(255, 0, 255, 0.1); /* soft magenta glow */
+    box-shadow: 0 8px 25px rgba(255, 0, 255, 0.2);
+}
+
+.movie-info{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.rating-year{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    margin-top:5px;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+/* Navigation */
+body.light-mode .topNav {
+    background-color: #60a5fa;
+}
+body.light-mode .topNav:hover {
+    background-color: #1e40af;
+}
+body.light-mode .topNav a {
+    color: #ffffff;
+}
+body.light-mode .topNav a:hover {
+    border: 3px solid #e0f2fe;
+    color: #a78bfa;
+    background-color: #fce7f3;
+    box-shadow: 0 0 50px #60a5fa80;
+}
+
+/* Forms & Inputs */
+body.light-mode form {
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+body.light-mode input {
+    color: #1e293b;
+}
+body.light-mode input:hover {
+    background-color: #e0f2fe;
+}
+
+/* Genre Labels */
+body.light-mode .genre {
+    background-color: #f1f5f9;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+body.light-mode .genre label {
+    border: 2px solid #60a5fa;
+    color: #1e293b;
+}
+body.light-mode .genre label:hover {
+    background-color: #38bdf8;
+    color: #fff;
+    box-shadow: 0 0 16px #60a5fa;
+}
+
+/* Cards & Thumbnails */
+body.light-mode .card {
+    background-color: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+body.light-mode .card:hover {
+    background-color: #60a5fa;
+    box-shadow: 0 0 35px #60a5fa80;
+}
+body.light-mode .thumbnail {
+    border: 3px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+body.light-mode .overview {
+    background: linear-gradient(rgba(241,245,249,0.97), rgba(226,232,240,0.97));
+    color: #1e293b;
+}
+body.light-mode .card:hover .overview {
+    background-color: rgba(238, 130, 238, 0.15);
+    box-shadow: 0 8px 25px rgba(59,130,246,0.2);
+}
+
+/* Load More Button */
+body.light-mode #loadMore {
+    background-color: #3b82f6;
+}
+body.light-mode #loadMore:hover {
+    background-color: #2563eb;
+    box-shadow: 0 0 20px #60a5fa;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    float: right;
+    margin: 10px 16px;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background-color: rgba(255,255,255,0.15);
+    transform: rotate(20deg) scale(1.15);
+}
+
+body.light-mode #theme-toggle {
+    color: #1e293b;
+}
+
+body.light-mode #theme-toggle:hover {
+    background-color: rgba(0,0,0,0.07);
+}
+
+.moviesReview{
+    color: pink;
+}
+
+#title{
+    text-align: center;
+    a{
+        color: lightcoral;
+        text-decoration: none;
+    }
+    a:hover{
+        background-color: white;
+        border-radius: 15px;
+        border: 3px solid white;
+        font-size: 1.6rem;
+        box-shadow: 2px 2px 4px deeppink;
+    }
+}

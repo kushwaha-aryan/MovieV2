@@ -1,0 +1,20 @@
+# WebStorm default
+/shelf/
+/workspace.xml
+/queries/
+/dataSources/
+/dataSources.local.xml
+/httpRequests/
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+
+# Optional: Images you don’t want in repo
+# *.jpg
+# *.png
