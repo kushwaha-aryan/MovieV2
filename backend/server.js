@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from "cors"
 import review from "./api/reviews.route.js"
-import movies from "./api/movies.route.js"
+import movies from "./api/movie.route.js"
 
 const app = express();
 
