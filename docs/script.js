@@ -1,6 +1,6 @@
-const APILINK = 'https://api.themoviedb.org/3/discover/movie?sort_by=revenue.desc&api_key=c8c519bd0d0baf45eb026e4be9d0599c&page=1';
+const BACKEND = 'https://moviev2-backend.onrender.com/api/v1/movies';
 const IMG_PATH = 'https://image.tmdb.org/t/p/w500';
-const SEARCHAPI='https://api.themoviedb.org/3/search/movie?&api_key=c8c519bd0d0baf45eb026e4be9d0599c&query=';
+
 const genres = [
     { id: 28, name: "Action" },
     { id: 12, name: "Adventure" },
@@ -30,22 +30,31 @@ const loadMoreBtn = document.getElementById('loadMore');
 const genreContainer = document.querySelector('.genre');
 
 let currentPage = 1;
-let currentURL = APILINK;
+let currentType = 'discover';
+let currentGenre = '';
+let currentSearch = '';
 
-returnMovies(APILINK);
+returnMovies();
 
-function returnMovies(url){
+function returnMovies(){
+    let url;
+    if(currentType === 'search'){
+        url = `${BACKEND}/search?q=${currentSearch}&page=${currentPage}`;
+    } else if(currentType === 'genre'){
+        url = `${BACKEND}/genre/${currentGenre}?page=${currentPage}`;
+    } else {
+        url = `${BACKEND}?page=${currentPage}`;
+    }
+
     fetch(url)
         .then(res => res.json())
         .then(function(data){
-            console.log(data.results);
             data.results.forEach(elements => {
                 const div_card = document.createElement('div');
                 div_card.setAttribute('class', 'card');
 
                 const image = document.createElement('img');
                 image.setAttribute('class', 'thumbnail');
-                image.setAttribute('id', 'image');
 
                 const title = document.createElement('h3');
                 title.setAttribute('id', 'title');
@@ -67,28 +76,23 @@ function returnMovies(url){
 
                 ratingYear.appendChild(rating);
                 ratingYear.appendChild(year);
-
                 movieInfo.appendChild(ratingYear);
                 movieInfo.appendChild(overview);
 
-
                 title.innerHTML = `${elements.title}<br><a href="movies.html?id=${elements.id}&title=${elements.title}">Reviews</a>`;
-                
+
                 image.src = elements.poster_path
                     ? IMG_PATH + elements.poster_path
                     : 'https://raw.githubusercontent.com/kushwaha-aryan/storage/refs/heads/main/mohamed_hassan-cinema-4153289_1920.jpg';
                 image.onerror = () => image.src = 'https://raw.githubusercontent.com/kushwaha-aryan/storage/refs/heads/main/mohamed_hassan-cinema-4153289_1920.jpg';
 
                 rating.innerHTML = `⭐ ${elements.vote_average.toFixed(2)}`;
-
                 year.innerHTML = elements.release_date?.split("-")[0];
-
                 overview.innerHTML = elements.overview;
 
                 div_card.appendChild(image);
                 div_card.appendChild(title);
                 div_card.appendChild(movieInfo);
-
                 main.appendChild(div_card);
             });
         });
@@ -101,45 +105,33 @@ genres.forEach(g => {
 });
 
 genreContainer.addEventListener('change', () => {
-    const selected = document.querySelector('input[name="genre"]:checked').value;
-
-    currentURL = APILINK + `&with_genres=${selected}`;
-
-    main.innerHTML = '';
+    currentGenre = document.querySelector('input[name="genre"]:checked').value;
+    currentType = 'genre';
     currentPage = 1;
-
-    returnMovies(currentURL);
+    main.innerHTML = '';
+    returnMovies();
 });
 
 loadMoreBtn.addEventListener('click', () => {
     currentPage++;
-    const nextURL = currentURL.replace(/&page=\d+/, `&page=${currentPage}`);
-    currentURL = nextURL;
-    returnMovies(nextURL);
+    returnMovies();
 });
 
-form.addEventListener('submit', (e)=>{
+form.addEventListener('submit', (e) => {
     e.preventDefault();
-    main.innerHTML = '';
-    currentPage = 1;
-    const searchItem=search.value;
-
+    const searchItem = search.value;
     if(searchItem){
-        currentURL = SEARCHAPI + searchItem + `&page=1`;
-        main.innerHTML = '';
+        currentType = 'search';
+        currentSearch = searchItem;
         currentPage = 1;
-        returnMovies(currentURL);
-        search.value="";
-        // optional: deselect genre radios
+        main.innerHTML = '';
+        returnMovies();
+        search.value = "";
         document.querySelectorAll('input[name="genre"]').forEach(r => r.checked = false);
     }
-})
+});
 
-
-
-// Theme Toggle Script
 const themeToggle = document.getElementById('theme-toggle');
-
 themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
     themeToggle.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
