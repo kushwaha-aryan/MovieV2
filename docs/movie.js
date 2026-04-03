@@ -3,7 +3,35 @@ const movieId = url.searchParams.get('id');
 const movieTitle = url.searchParams.get('title');
 
 const APILINK = 'https://moviev2-backend.onrender.com/api/v1/reviews/';
+const BACKEND = 'https://moviev2-backend.onrender.com/api/v1/movies';
+const IMG_PATH = 'https://image.tmdb.org/t/p/w500';
+const movieDetails = document.getElementById('movie-Details');
 
+returnReviews(APILINK);
+addDetails();
+
+function addDetails() {
+    fetch(`${BACKEND}/${movieId}`)
+        .then(res => res.json())
+        .then(function(data) {
+            const divCard=document.createElement("div");
+            divCard.setAttribute('class', 'card');
+
+            const img = document.createElement('img');
+            img.setAttribute('class', 'thumbnail');
+            img.src = data.poster_path
+                ? IMG_PATH + data.poster_path
+                : 'https://raw.githubusercontent.com/kushwaha-aryan/storage/refs/heads/main/mohamed_hassan-cinema-4153289_1920.jpg';
+
+            const overview=document.createElement('p')
+            overview.textContent=data.overview;
+
+            divCard.appendChild(img);
+            divCard.appendChild(overview);
+
+            movieDetails.appendChild(divCard);
+        });
+}
 
 const main = document.getElementById('section');
 const title = document.getElementById('title');
@@ -11,7 +39,7 @@ const title = document.getElementById('title');
 title.textContent = movieTitle;
 
 const div_new = document.createElement( 'div');
-div_new. innerHTML =`
+div_new.innerHTML =`
     <div class="row">
         <div class="column">
             <div class="card">
@@ -30,8 +58,6 @@ div_new. innerHTML =`
 `
 
 main.appendChild(div_new)
-
-returnReviews(APILINK);
 
 function returnReviews(url) {
     fetch(url + "movie/" + movieId)
@@ -83,6 +109,11 @@ function editReview(id, review, user) {
 function saveReview(reviewInputId, userInputId, id="") {
     const review = document.getElementById(reviewInputId).value;
     const user = document.getElementById(userInputId).value;
+
+    if(!user || !review) {
+        alert("Please fill in both fields");
+        return;
+    }
 
     if(id){
         fetch(APILINK + id, {

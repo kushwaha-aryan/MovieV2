@@ -48,6 +48,7 @@ export default class ReviewsController {
             var { error } = reviewResponse
             if (error) {
                 res.status(400).json({ error })
+                return;
             }
 
             if (reviewResponse.modifiedCount === 0) {

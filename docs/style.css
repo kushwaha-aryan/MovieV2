@@ -344,3 +344,39 @@ body.light-mode #theme-toggle:hover {
         box-shadow: 2px 2px 4px deeppink;
     }
 }
+
+#movie-page {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+#movie-Details {
+    flex: 1;
+}
+
+#section {
+    flex: 2;
+}
+
+@media (max-width: 768px) {
+    #movie-page {
+        flex-direction: column;
+    }
+
+    #movie-Details .thumbnail {
+        max-width: 100%;
+    }
+}
+
+#movie-Details .thumbnail {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+#movie-Details .thumbnail:hover {
+    border: 3px solid white;
+    border-radius: 15px;
+    transform: none;
+}
